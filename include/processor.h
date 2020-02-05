@@ -1,12 +1,15 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
+#include <unistd.h>
 
 class Processor {
  public:
-  float Utilization();  // TODO: See src/processor.cpp
+  float Utilization();
 
-  // TODO: Declare any necessary private members
  private:
+float PrevTotal{0};
+float PrevIdle{0};
+float User_Hz {(float) 1.0/sysconf(_SC_CLK_TCK)};
 };
 
 #endif
