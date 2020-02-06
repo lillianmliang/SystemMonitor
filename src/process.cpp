@@ -25,8 +25,4 @@ string Process::User() const { return LinuxParser::User(Pid()); }
 
 long int Process::UpTime() const { return LinuxParser::UpTime(Pid());}
 
-bool Process::operator<(Process const& a) const { 
-    //return this->pid < a.pid; //uncomment if sorting by PID
-    //return UpTime() < a.UpTime(); //uncomment if sorting by uptime    
-    return CpuUtilization() > a.CpuUtilization(); //uncomment if sorting by descending CpuUtilization
-}
+bool Process::operator<(Process const& a) const { return CpuUtilization() > a.CpuUtilization(); }

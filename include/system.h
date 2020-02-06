@@ -6,6 +6,7 @@
 
 #include "process.h"
 #include "processor.h"
+#include "linux_parser.h"
 
 class System {
  public:
@@ -21,6 +22,8 @@ class System {
  private:
   Processor cpu_ = {};
   std::vector<Process> processes_ = {};
+  std::string OS{LinuxParser::OperatingSystem()};
+  std::string kernel{LinuxParser::Kernel()};
 };
 
 #endif

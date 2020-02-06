@@ -16,31 +16,24 @@ using std::size_t;
 using std::string;
 using std::vector;
 
-string OS{""};
-string kernel{""};
-
 Processor& System::Cpu() { return cpu_; }
 
 vector<Process>& System::Processes() { 
     processes_.clear();
     for (int pid:LinuxParser::Pids()){
-        Process process;
-        process.Pid(pid);
-        processes_.push_back(process);
+        processes_.emplace_back(pid);
     }
     std::sort(processes_.begin(), processes_.end());
     return processes_; 
 }
 
 std::string System::Kernel() { 
-    if (kernel=="") kernel = LinuxParser::Kernel();
     return kernel;  
 }
 
 float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(); }
 
 std::string System::OperatingSystem() { 
-    if (OS=="") OS = LinuxParser::OperatingSystem();
     return OS; 
 }  
 

@@ -207,10 +207,10 @@ long LinuxParser::UpTime(int pid) {
 
 // Used implementation from https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat/16736599#16736599
 float LinuxParser::CpuUtilization(int pid) {
-  int utime; //14
-  int stime; //15
-  int cutime; //16
-  int cstime; //17
+  int utime;
+  int stime; 
+  int cutime; 
+  int cstime; 
   string temp;
   string line;
   std::ifstream stream(kProcDirectory + to_string(pid)+kStatFilename);
@@ -219,10 +219,10 @@ float LinuxParser::CpuUtilization(int pid) {
     std::istringstream linestream(line);
     for (int i = 1; i<=17; i++){
       linestream >> temp;
-      if (i == 14) utime = stoi(temp);
-      if (i == 15) stime = stoi(temp);
-      if (i == 16) cutime = stoi(temp);
-      if (i == 17) cstime = stoi(temp);
+      if (i == kUTime_) utime = stoi(temp);
+      if (i == kSTime_) stime = stoi(temp);
+      if (i == kCUTime_) cutime = stoi(temp);
+      if (i == kCSTime_) cstime = stoi(temp);
     }
   }
   float total_time = (float)(utime+stime+cutime+cstime)/(float)sysconf(_SC_CLK_TCK);
